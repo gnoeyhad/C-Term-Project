@@ -14,3 +14,5 @@ public:
     int CheckBoard(); // 스도쿠 보드의 숫자 중복 여부를 판단
     void ControlInput(); // 사용자의 입력 처리 
 };
+
+

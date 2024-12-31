@@ -1,5 +1,4 @@
 #include <iostream>
-#include <conio.h> // 입력을 위한 _getch()함수 사용 
 #include "StageMaker.h"
 #include "Sudoku.h"
 
@@ -139,43 +138,35 @@ int Sudoku::CheckBoard()
 
 // 사용자의 입력 처리 
 void Sudoku::ControlInput() {
-    char inputChar = _getch(); // 키보드 입력 (사용자에게 입력받을 때마다 즉각 아스키코드로 반환)
+    char inputChar;
+    cin >> inputChar; // 키보드 입력 (사용자에게 입력받을 때마다 즉각 아스키코드로 반환)
 
     switch (inputChar) {
-    case 72: // 위쪽 방향키
+    case 'w': // 위쪽 이동
         s_selY = max(0, s_selY - 1); // 커서 위로 이동
         break;
-    case 75: // 왼쪽 방향키
+    case 'a': // 왼쪽 이동
         s_selX = max(0, s_selX - 1); // 커서 왼쪽 이동
         break;
-    case 80: // 아래쪽 방향키
+    case 's': // 아래쪽 이동
         s_selY = min(8, s_selY + 1); // 커서 아래로 이동
         break;
-    case 77: // 오른쪽 방향키
+    case 'd': // 오른쪽 이동
         s_selX = min(8, s_selX + 1); // 커서 오른쪽 이동
         break;
-    case '!': // 답안 보기 
-        if (open_answer == 0) // 답안이 표시되어 있지 않다면
-            open_answer = 1; // 답안 표시
-        else
-            open_answer = 0; // 답안 미표시
+    case '!': // 답안 보기
+        open_answer = !open_answer; // 답안 보기 상태 변경 
         break;
     case '0': // 숫자 지우기
-        // 보드에 1~9 사이의 숫자가 적혀있다며
-        if (s_board[s_selX][s_selY] <= 10)
-            s_board[s_selX][s_selY] = 0; // 0으로 초기화 
+        if (s_board[s_selX][s_selY] <= 10) // 수정 가능한 위치인지 확인
+            s_board[s_selX][s_selY] = 0; // 0으로 초기화
         break;
-    case '1': // 1~9 사이 사용자가 입력한 숫자 
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9':
-        if (s_board[s_selX][s_selY] <= 10) // 수정 가능한 위치인지 확인(사전에 주어진 숫자는 >10)
-            s_board[s_selX][s_selY] = inputChar - '0'; // 입력한 숫자를 보드에 저장 -'0': char을 int로 변경
+    case '1': case '2': case '3': case '4':
+    case '5': case '6': case '7': case '8': case '9': // 숫자 입력
+        if (s_board[s_selX][s_selY] <= 10) // 수정 가능한 위치인지 확인
+            s_board[s_selX][s_selY] = inputChar - '0'; // 입력한 숫자를 보드에 저장
         break;
     }
+
 }
+

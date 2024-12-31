@@ -9,23 +9,21 @@ int boxCheck[9][10] = { 0 }; // 3x3 영역 숫자 사용 여부 체크
 
 
 int solved = 0; // 풀이 된 상태 확인 
-int a_board[9][9] = { // 스도쿠 보드 상태를 임시 저장 
-	0,
-};
+int a_board[9][9] = { 0, };// 스도쿠 보드 상태를 임시 저장 
 
-void ShuffleRow(int board[9][9]);
-void ShuffleCol(int board[9][9]);
-void ShuffleNum(int board[9][9]);
+void ShuffleRow(int board[9][9]); // 행(row)을 무작위로 섞음
+void ShuffleCol(int board[9][9]); // 열(col)을 무작위로 섞음
+void ShuffleNum(int board[9][9]); // 특정한 두개의 숫자를 교환하여 보드를 섞음
 
-int SolveBoardRecursion(int s_board[9][9]);
-void SolveBoard(int s_board[9][9]);
+int SolveBoardRecursion(int s_board[9][9]); // 스도쿠 퍼즐 풀이 (재귀적 알고리즘 - 백트래킹 사용)
+void SolveBoard(int s_board[9][9]); // 보드 풀이를 초기화한 뒤, 스도쿠 퍼즐 풀이(Recursion) 호출
 void DrawAnswer(int s_board[9][9], bool open_answer); // 정답 공개 함수 
 
 // 콘솔의 커서를 이동하는 함수 
 void gotoxy(int x, int y)
 {
 	COORD pos = { x, y }; // x, y를 가지고 있는 구조체 
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); // windows 에 들어있는 함수로 커서를 이동시킴
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); // 커서 이동
 }
 
 // 정답 공개 함수 
